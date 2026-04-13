@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yellow Hills – Uttarakhandi & Multi Cuisine Restaurant</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --gold:#C9A84C;
+  --gold-light:#E8C97A;
+  --cream:#FAF6EE;
+  --dark:#1A1208;
+  --forest:#2D4A22;
+  --forest-light:#3E6830;
+  --brown:#5C3D1E;
+  --muted:#7A6A55;
+  --white:#FFFFFF;
+  --card-bg:#FFFDF7;
+  --border:#E8DFC8;
+  --shadow:0 8px 40px rgba(26,18,8,0.12);
+  --radius:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+
+/* ─── NAVBAR ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:72px;transition:all .4s}
+nav.scrolled{background:rgba(26,18,8,0.96);backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(0,0,0,0.3)}
+.nav-logo{display:flex;flex-direction:column;line-height:1}
+.nav-logo span:first-child{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold);font-weight:700}
+.nav-logo span:last-child{font-size:.65rem;color:rgba(255,255,255,0.6);letter-spacing:3px;text-transform:uppercase}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:.9rem;font-weight:500;letter-spacing:.5px;position:relative;padding-bottom:4px;transition:color .3s}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--gold);transition:width .3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{width:100%}
+.nav-reserve{background:var(--gold);color:var(--dark)!important;padding:.5rem 1.2rem;border-radius:50px;font-weight:600!important;transition:transform .2s,background .2s!important}
+.nav-reserve:hover{background:var(--gold-light);transform:translateY(-1px)}
+.nav-reserve::after{display:none!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
+.hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ─── HERO ─── */
+#home{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:
+  linear-gradient(135deg,rgba(26,18,8,0.85) 0%,rgba(45,74,34,0.6) 50%,rgba(26,18,8,0.8) 100%),
+  url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1600&q=80') center/cover no-repeat}
+.hero-particles{position:absolute;inset:0;pointer-events:none}
+.hero-particles::before,.hero-particles::after{content:'';position:absolute;border-radius:50%;background:rgba(201,168,76,0.08);animation:float 8s ease-in-out infinite}
+.hero-particles::before{width:600px;height:600px;top:-100px;right:-100px}
+.hero-particles::after{width:400px;height:400px;bottom:-50px;left:-80px;animation-delay:-4s}
+@keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-20px) scale(1.05)}}
+.hero-content{position:relative;z-index:2;padding:0 8%;max-width:760px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.4);color:var(--gold);padding:.4rem 1rem;border-radius:50px;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem;backdrop-filter:blur(6px)}
+.hero-badge i{font-size:.7rem}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);color:var(--white);line-height:1.15;margin-bottom:1rem}
+.hero-title em{color:var(--gold);font-style:italic}
+.hero-tagline{font-size:1.1rem;color:rgba(255,255,255,0.75);margin-bottom:.6rem;font-weight:300;letter-spacing:.5px}
+.hero-sub{font-size:.85rem;color:rgba(255,255,255,0.5);margin-bottom:2.5rem;letter-spacing:1px;text-transform:uppercase}
+.hero-stars{display:flex;align-items:center;gap:.5rem;margin-bottom:2.5rem}
+.hero-stars .stars{color:var(--gold);font-size:1.1rem;letter-spacing:2px}
+.hero-stars span{color:rgba(255,255,255,0.7);font-size:.9rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--dark);padding:.85rem 2rem;border-radius:50px;font-weight:600;text-decoration:none;font-size:.95rem;transition:all .3s;border:none;cursor:pointer}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,168,76,0.4)}
+.btn-outline{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--white);padding:.85rem 2rem;border-radius:50px;font-weight:500;text-decoration:none;font-size:.95rem;border:1.5px solid rgba(255,255,255,0.4);transition:all .3s;cursor:pointer}
+.btn-outline:hover{background:rgba(255,255,255,0.1);border-color:var(--white)}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,0.5);font-size:.75rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
+.hero-scroll::before{content:'';display:block;width:1px;height:40px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.4));margin-bottom:.3rem}
+.hero-scroll-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:scrollBounce 2s ease-in-out infinite}
+@keyframes scrollBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* ─── SECTION COMMONS ─── */
+section{padding:6rem 5%}
+.section-label{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;font-weight:600}
+.section-label::before{content:'';display:inline-block;width:30px;height:2px;background:var(--gold)}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);color:var(--dark);margin-bottom:.6rem;line-height:1.2}
+.section-sub{color:var(--muted);font-size:1rem;max-width:520px;line-height:1.7}
+.section-header{margin-bottom:3.5rem}
+
+/* ─── HIGHLIGHTS BAR ─── */
+.highlights{background:var(--dark);padding:2rem 5%;display:flex;justify-content:space-around;flex-wrap:wrap;gap:1.5rem}
+.highlight-item{display:flex;align-items:center;gap:.8rem;color:rgba(255,255,255,0.85)}
+.highlight-icon{width:44px;height:44px;border-radius:50%;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1rem;flex-shrink:0}
+.highlight-text strong{display:block;font-size:.95rem;font-weight:600;color:var(--white)}
+.highlight-text span{font-size:.78rem;color:rgba(255,255,255,0.5);letter-spacing:.5px}
+
+/* ─── MENU ─── */
+#menu{background:var(--white)}
+.menu-tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:3rem}
+.menu-tab{padding:.55rem 1.2rem;border-radius:50px;border:1.5px solid var(--border);background:transparent;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;transition:all .25s;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.menu-tab:hover{border-color:var(--gold);color:var(--gold)}
+.menu-tab.active{background:var(--gold);border-color:var(--gold);color:var(--dark);font-weight:600}
+.menu-category{display:none;animation:fadeIn .35s ease}
+.menu-category.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+.menu-item{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.3rem;display:flex;align-items:center;gap:.8rem;transition:all .25s;cursor:default}
+.menu-item:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(201,168,76,0.15);transform:translateY(-2px)}
+.menu-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.menu-dot.green{background:var(--forest-light)}
+.menu-item-name{font-size:.9rem;color:var(--dark);font-weight:500;line-height:1.4}
+.menu-category-title{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--dark);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+.menu-category-title::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ─── GALLERY ─── */
+#gallery{background:var(--cream)}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto;gap:1rem}
+.gallery-item{position:relative;overflow:hidden;border-radius:var(--radius);cursor:pointer;background:var(--dark)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s;display:block}
+.gallery-item:hover img{transform:scale(1.08)}
+.gallery-item:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gallery-item:nth-child(5){grid-column:span 2}
+.gallery-item .gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,18,8,0.7) 0%,transparent 50%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:1.2rem}
+.gallery-item:hover .gallery-overlay{opacity:1}
+.gallery-overlay span{color:var(--white);font-size:.85rem;font-weight:500}
+.gallery-overlay i{color:var(--gold);font-size:1.5rem;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9999;align-items:center;justify-content:center;padding:2rem}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:85vh;border-radius:8px;object-fit:contain}
+.lightbox-close{position:absolute;top:1.5rem;right:2rem;color:var(--white);font-size:2rem;cursor:pointer;opacity:.7;transition:opacity .2s}
+.lightbox-close:hover{opacity:1}
+
+/* ─── ABOUT ─── */
+#about{background:var(--dark);position:relative;overflow:hidden}
+#about::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:rgba(45,74,34,0.15)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-img-wrap{position:relative}
+.about-img-wrap img{width:100%;border-radius:20px;object-fit:cover;height:500px}
+.about-badge{position:absolute;bottom:-20px;left:-20px;background:var(--gold);color:var(--dark);padding:1.5rem;border-radius:16px;text-align:center;box-shadow:0 8px 30px rgba(201,168,76,0.3)}
+.about-badge .big{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;display:block;line-height:1}
+.about-badge small{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;font-weight:600}
+.about-content .section-title{color:var(--white)}
+.about-content .section-sub{color:rgba(255,255,255,0.6)}
+.about-features{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:2rem 0}
+.about-feature{display:flex;align-items:flex-start;gap:.8rem}
+.about-feature-icon{width:38px;height:38px;border-radius:10px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.9rem;flex-shrink:0;margin-top:2px}
+.about-feature-text strong{display:block;color:var(--white);font-size:.9rem;margin-bottom:.2rem}
+.about-feature-text span{color:rgba(255,255,255,0.5);font-size:.8rem}
+.about-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.about-tag{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);padding:.4rem .9rem;border-radius:50px;font-size:.78rem}
+
+/* ─── CONTACT ─── */
+#contact{background:var(--cream)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start}
+.contact-info{display:flex;flex-direction:column;gap:2rem}
+.contact-info-item{display:flex;gap:1rem;align-items:flex-start}
+.contact-icon{width:48px;height:48px;border-radius:12px;background:var(--gold);display:flex;align-items:center;justify-content:center;color:var(--dark);font-size:1rem;flex-shrink:0}
+.contact-info-item strong{display:block;font-weight:600;color:var(--dark);margin-bottom:.3rem}
+.contact-info-item span,.contact-info-item a{color:var(--muted);font-size:.9rem;text-decoration:none;line-height:1.6}
+.contact-info-item a:hover{color:var(--gold)}
+.map-embed{border-radius:var(--radius);overflow:hidden;height:220px;border:2px solid var(--border);margin-top:2rem}
+.map-embed iframe{width:100%;height:100%;border:none;display:block}
+.contact-form{background:var(--white);border-radius:20px;padding:2.5rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+.contact-form h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--dark);margin-bottom:.4rem}
+.contact-form p{color:var(--muted);font-size:.87rem;margin-bottom:2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.form-group label{font-size:.82rem;font-weight:600;color:var(--dark);letter-spacing:.3px}
+.form-group input,.form-group select,.form-group textarea{padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--dark);background:var(--cream);transition:border .2s,box-shadow .2s;resize:none;outline:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.12)}
+.form-group input.error,.form-group select.error,.form-group textarea.error{border-color:#e74c3c}
+.form-error{color:#e74c3c;font-size:.78rem;display:none}
+.form-error.show{display:block}
+.form-success{background:#f0fff4;border:1px solid #68d391;border-radius:10px;padding:1rem;color:#276749;font-size:.9rem;display:none;text-align:center}
+.form-success.show{display:block}
+
+/* ─── FOOTER ─── */
+footer{background:var(--dark);padding:3rem 5% 1.5rem;color:rgba(255,255,255,0.6)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,0.08)}
+.footer-brand .nav-logo{margin-bottom:1rem}
+.footer-brand p{font-size:.85rem;line-height:1.7;max-width:260px;color:rgba(255,255,255,0.5)}
+.footer-social{display:flex;gap:.7rem;margin-top:1.2rem}
+.footer-social a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);font-size:.85rem;transition:all .25s;text-decoration:none}
+.footer-social a:hover{background:var(--gold);border-color:var(--gold);color:var(--dark)}
+.footer-col h4{color:var(--white);font-size:.9rem;font-weight:600;margin-bottom:1rem;letter-spacing:.5px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.footer-col ul li a{color:rgba(255,255,255,0.45);font-size:.83rem;text-decoration:none;transition:color .2s}
+.footer-col ul li a:hover{color:var(--gold)}
+.footer-hours{display:flex;flex-direction:column;gap:.4rem}
+.footer-hours .hour-row{display:flex;justify-content:space-between;gap:1rem;font-size:.8rem}
+.footer-hours .hour-row span:first-child{color:rgba(255,255,255,0.5)}
+.footer-hours .hour-row span:last-child{color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;flex-wrap:wrap;gap:.5rem}
+.footer-bottom p{font-size:.8rem;color:rgba(255,255,255,0.3)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .about-img-wrap img{height:350px}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(3,1fr)}
+  .gallery-item:nth-child(1){grid-column:span 2}
+  .gallery-item:nth-child(5){grid-column:span 1}
+}
+@media(max-width:768px){
+  nav{padding:0 5%}
+  .nav-links{display:none;position:absolute;top:72px;left:0;right:0;background:rgba(26,18,8,0.98);flex-direction:column;padding:1.5rem 5%;gap:0}
+  .nav-links.open{display:flex}
+  .nav-links li{border-bottom:1px solid rgba(255,255,255,0.06)}
+  .nav-links a{display:block;padding:.9rem 0;font-size:1rem}
+  .nav-links .nav-reserve{display:inline-flex;margin:.5rem 0 1rem;padding:.6rem 1.4rem}
+  .hamburger{display:flex}
+  section{padding:4rem 5%}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .gallery-item:nth-child(1){grid-column:span 2;grid-row:span 1}
+  .gallery-item:nth-child(5){grid-column:span 2}
+  .footer-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .highlights{flex-direction:column;align-items:flex-start}
+  .about-features{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .hero-btns{flex-direction:column;max-width:240px}
+  .btn-primary,.btn-outline{justify-content:center}
+  .gallery-grid{grid-template-columns:1fr}
+  .gallery-item:nth-child(1),.gallery-item:nth-child(5){grid-column:span 1}
+  .menu-tabs{overflow-x:auto;flex-wrap:nowrap;padding-bottom:.5rem}
+  .menu-tabs::-webkit-scrollbar{height:3px}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─── -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <span>Yellow Hills</span>
+    <span>Uttarakhandi · Multi Cuisine</span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-reserve">Reserve</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-particles"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-mountain"></i> Dehradun, Uttarakhand</div>
+    <h1 class="hero-title">Authentic <em>Uttarakhandi</em><br>Flavors & World Cuisine</h1>
+    <p class="hero-tagline">A journey through the mountains, on every plate.</p>
+    <p class="hero-sub">NH 7, Saraswati Vihar · Ajabpur Khurd · Dehradun</p>
+    <div class="hero-stars">
+      <span class="stars">★★★★★</span>
+      <span>4.7 · 2,823+ Reviews</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary"><i class="fas fa-calendar-check"></i> Reserve a Table</a>
+      <a href="#menu" class="btn-outline"><i class="fas fa-utensils"></i> Explore Menu</a>
+    </div>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('highlights').scrollIntoView({behavior:'smooth'})">
+    <div class="hero-scroll-dot"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ─── HIGHLIGHTS ─── -->
+<div class="highlights" id="highlights">
+  <div class="highlight-item">
+    <div class="highlight-icon"><i class="fas fa-fire"></i></div>
+    <div class="highlight-text"><strong>Fireplace & Rooftop</strong><span>Cozy ambience</span></div>
+  </div>
+  <div class="highlight-item">
+    <div class="highlight-icon"><i class="fas fa-music"></i></div>
+    <div class="highlight-text"><strong>Live Music</strong><span>Selected evenings</span></div>
+  </div>
+  <div class="highlight-item">
+    <div class="highlight-icon"><i class="fas fa-leaf"></i></div>
+    <div class="highlight-text"><strong>Organic Dishes</strong><span>Farm to table</span></div>
+  </div>
+  <div class="highlight-item">
+    <div class="highlight-icon"><i class="fas fa-wine-glass-alt"></i></div>
+    <div class="highlight-text"><strong>Great Wine List</strong><span>Curated selection</span></div>
+  </div>
+  <div class="highlight-item">
+    <div class="highlight-icon"><i class="fas fa-wheelchair"></i></div>
+    <div class="highlight-text"><strong>Accessible</strong><span>Wheelchair friendly</span></div>
+  </div>
+  <div class="highlight-item">
+    <div class="highlight-icon"><i class="fas fa-child"></i></div>
+    <div class="highlight-text"><strong>Family Friendly</strong><span>Kids menu available</span></div>
+  </div>
+</div>
+
+<!-- ─── MENU ─── -->
+<section id="menu">
+  <div class="section-header">
+    <div class="section-label">Culinary Journey</div>
+    <h2 class="section-title">Our Menu</h2>
+    <p class="section-sub">From Pahadi Thalis to wood-fired pizzas — an expedition of flavours from the hills to the world.</p>
+  </div>
+
+  <div class="menu-tabs" id="menuTabs">
+    <button class="menu-tab active" data-cat="teas">Teas</button>
+    <button class="menu-tab" data-cat="coffee">Coffee</button>
+    <button class="menu-tab" data-cat="drinks">Drinks</button>
+    <button class="menu-tab" data-cat="soups">Soups & Salads</button>
+    <button class="menu-tab" data-cat="starters">Desi Starters</button>
+    <button class="menu-tab" data-cat="momos">Momos</button>
+    <button class="menu-tab" data-cat="indian-veg">Indian Veg</button>
+    <button class="menu-tab" data-cat="indian-nonveg">Indian Non-Veg</button>
+    <button class="menu-tab" data-cat="chinese">Chinese</button>
+    <button class="menu-tab" data-cat="continental">Continental</button>
+    <button class="menu-tab" data-cat="pizza">Pizza & Burger</button>
+    <button class="menu-tab" data-cat="pasta">Pastas</button>
+    <button class="menu-tab" data-cat="sandwich">Sandwich & Wrap</button>
+    <button class="menu-tab" data-cat="breads">Breads & Rice</button>
+    <button class="menu-tab" data-cat="sizzlers">Sizzlers & Platters</button>
+    <button class="menu-tab" data-cat="sides">Sides</button>
+    <button class="menu-tab" data-cat="sweets">Sweets</button>
+  </div>
+
+  <div id="menuContent">
+
+    <div class="menu-category active" data-cat="teas">
+      <h3 class="menu-category-title"><i class="fas fa-mug-hot" style="color:var(--gold)"></i> Teas</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Assam Black Tea</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Exotic Blue Tea</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Green Tea</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Kashmiri Kahwa</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Lavender Rose Tea</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Lemon Green Tea</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Moroccan Mint Tea</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Nettle Green Tea</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Peachy Blush Tea</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Rose Green Tea</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Scarlet Red Tea</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Himalayan Brandy / Rum / Wine Tea</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Holiday Romance Strawberry Tea</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Honey Lemon Tea</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="coffee">
+      <h3 class="menu-category-title"><i class="fas fa-coffee" style="color:var(--gold)"></i> Coffee</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Cafe Latte</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Cappuccino</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="drinks">
+      <h3 class="menu-category-title"><i class="fas fa-glass-martini-alt" style="color:var(--gold)"></i> Drinks & Beverages</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Cold Coffee</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Cold Coffee With Ice Cream</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Fresh Lime Soda</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Fruit Beer</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Mojito – Green Apple</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Mojito – Kala Khatta</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Mojito – Virgin</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Mojito – Watermelon</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Lemon Ice Tea</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Mango Smoothies</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Pina Colada</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Strawberry Blast / Frozen / Smoothie</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Sunrise Yellow Hills</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Thai Champagne</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Peach Ice Tea</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Soft Drinks</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Mineral Water Bottle</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="soups">
+      <h3 class="menu-category-title"><i class="fas fa-bowl-food" style="color:var(--gold)"></i> Soups & Salads</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Cream Of Tomato Soup</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Tomato Basil Soup – Veg / Non-Veg</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Minestrone – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Hot N Sour Soup – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Lemon Coriander Soup – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Lung Fung Soup – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Manchow Soup – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">BBQ Chicken Salad</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Caesar Salad – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Greek Salad</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Organic Garden Salad</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Spicy Chicken Tikka Salad</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Spicy Grilled Pineapple Salad</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="starters">
+      <h3 class="menu-category-title"><i class="fas fa-fire-flame-curved" style="color:var(--gold)"></i> Desi Starters</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Paneer Tikka – Classic / Malai / Achari</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Rosemary Chicken Tikka</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Murg Malai / Kali Mirch / Kasturi / Atishi Tikka</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chicken Seekh Kebab</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Amritsari Fish</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Lasooni Fish Tikka</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Vegetarian Kebab Platter</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Non-Veg Kebab Platter</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Hara Bhara Kebab</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Dahi Ke Sholay</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Soya Chaap</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Tandoori Chicken – Half / Full</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="momos">
+      <h3 class="menu-category-title"><i class="fas fa-drumstick-bite" style="color:var(--gold)"></i> Momo's Section</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Steamed Momo – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Fried Momo – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Tandoori Momo – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Kothey – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chilli Garlic Momo – Veg / Chicken</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="indian-veg">
+      <h3 class="menu-category-title"><i class="fas fa-seedling" style="color:var(--gold)"></i> Indian – Vegetarian</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Chef Special Veg Biryani</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Daal Makhni</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Ghar Ki Daal</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Jakhiya Aloo</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Jeera Aloo</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Joshimath Rajma Masala</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Kadhai Paneer</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Palak Corn</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Paneer Bhurji</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Paneer Butter Masala</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Paneer Do Pyaza</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Paneer Malai Kofta</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Soya Chap Masala</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Vegetable Biryani</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Vegetables Kofta</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="indian-nonveg">
+      <h3 class="menu-category-title"><i class="fas fa-utensils" style="color:var(--gold)"></i> Indian – Non-Vegetarian</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Butter Chicken – Half / Full</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chicken Curry</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chicken Biryani</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chef Special Chicken Biryani</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chicken Do Pyaza</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Handi Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Kadai Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Murg Kali Mirch Masala</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Murg Korma Bemisaal</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Murg Tikka Masala</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Bhuna Gosht</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Fish Tikka Masala</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Pahadi Thali – Fish</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Pahadi Thali – Mutton</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Pahadi Thali – Non-Veg / Chicken Curry / Sarson Fish Curry</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="chinese">
+      <h3 class="menu-category-title"><i class="fas fa-bowl-rice" style="color:var(--gold)"></i> Chinese</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chowmein – Veg / Egg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Fried Rice – Veg / Egg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Hakka Noodles – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Spring Roll – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chilly Chicken – Dry / Gravy</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Chilly Paneer – Dry / Gravy</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Chilly Mushroom – Dry / Gravy</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Lemon Fish</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Schezwan Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Thai Curries – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Manchurian – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Crispy Corn</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Honey Chilly Potato</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Kung Pao Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Pad Thai Noodles – Veg / Chicken</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="continental">
+      <h3 class="menu-category-title"><i class="fas fa-globe-europe" style="color:var(--gold)"></i> Continental & Chef's Special</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Grilled Chicken Breast</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Grilled Cottage Cheese</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Grilled Fish</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Mexican Chipotle Bowl – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Mexican Chicken Wings</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Mumbai Mania</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Spinach & Corn Sandwich</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="pizza">
+      <h3 class="menu-category-title"><i class="fas fa-pizza-slice" style="color:var(--gold)"></i> Pizza & Burger</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Classic Margherita</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Chilli Paneer Pizza</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chicken Hawaiian Pizza</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chilli Chicken Pizza</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chicken Pepperoni Pizza</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Spicy Chicken Tikka Pizza</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Spicy Paneer Tikka Pizza</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Vegetable Bonanza Pizza</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Crispy Chicken Burger</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Highway Burger – Veg / Chicken</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Harshil Rajma Patty Burger</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Aloo Tikki Burger</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="pasta">
+      <h3 class="menu-category-title"><i class="fas fa-circle" style="color:var(--gold);font-size:.8rem"></i> Pastas</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Alfredo</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Pesto</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Suga Rosa</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Arrabiata</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Aglio E Olio</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Marinara</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="sandwich">
+      <h3 class="menu-category-title"><i class="fas fa-bread-slice" style="color:var(--gold)"></i> Sandwich & Wraps</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chicken Club Sandwich</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Veg Club Sandwich</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chicken Country Sandwich</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Country Sandwich – Cheese / Veg</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Veg Mexican Wrap</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chicken Mexican Wrap</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chicken Quesadilla</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Veg Quesadilla</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Chicken Tacos</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Veg Tacos</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Yellow Hills Special Sandwich</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="breads">
+      <h3 class="menu-category-title"><i class="fas fa-wheat-awn" style="color:var(--gold)"></i> Breads & Rice</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Baby Naan</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Garlic Naan</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Paneer Naan</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Onion Kulcha</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Laccha Parantha</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Missi Roti</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Roti – Plain / Butter</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Assorted Bread Basket</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Steamed Rice</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Pulao – Veg / Jeera / Peas</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Organic Red Rice</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="sizzlers">
+      <h3 class="menu-category-title"><i class="fas fa-fire" style="color:var(--gold)"></i> Sizzlers & Platters</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Singing Tree – Veg / Non-Veg</span></div>
+        <div class="menu-item"><div class="menu-dot"></div><span class="menu-item-name">Surf N Turf – Veg / Non-Veg</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="sides">
+      <h3 class="menu-category-title"><i class="fas fa-circle-dot" style="color:var(--gold)"></i> Sides</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Boondi Raita</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Masala Papad</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Masala Peanuts</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Mix Veg Raita</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Papad – Fried / Roasted</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Pineapple Raita</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Plain Curd</span></div>
+      </div>
+    </div>
+
+    <div class="menu-category" data-cat="sweets">
+      <h3 class="menu-category-title"><i class="fas fa-ice-cream" style="color:var(--gold)"></i> Sweets & Desserts</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Hot Gulab Jamun</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Gulab Jamun With Ice Cream</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Jhangore Ki Kheer</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Chocolate Brownie With Ice Cream</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Sizzling Walnut Brownie With Ice Cream</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Tutti Fruity</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Ice Cream – Butterscotch</span></div>
+        <div class="menu-item"><div class="menu-dot green"></div><span class="menu-item-name">Ice Cream – Chocolate / Mango / Strawberry / Vanilla</span></div>
+      </div>
+    </div>
+
+  </div><!-- /menuContent -->
+
+  <!-- veg/non-veg legend -->
+  <div style="display:flex;gap:1.5rem;margin-top:2rem;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted)">
+      <div style="width:10px;height:10px;border-radius:50%;background:var(--forest-light)"></div> Vegetarian
+    </div>
+    <div style="display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted)">
+      <div style="width:10px;height:10px;border-radius:50%;background:var(--gold)"></div> Non-Veg / Mixed
+    </div>
+  </div>
+</section>
+
+<!-- ─── GALLERY ─── -->
+<section id="gallery">
+  <div class="section-header">
+    <div class="section-label">Visual Story</div>
+    <h2 class="section-title">Gallery</h2>
+    <p class="section-sub">Experience the warmth of Yellow Hills through our spaces, dishes, and moments.</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Restaurant interior">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i><span>Restaurant Interior</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Food">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i><span>Signature Dishes</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80" alt="Cuisine">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i><span>Multi Cuisine</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Fine dining">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i><span>Fine Dining</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://images.unsplash.com/photo-1544025162-d76594e8bb31?w=800&q=80" alt="Pahadi food">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i><span>Pahadi Cuisine</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&q=80" alt="Bar">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i><span>Bar & Beverages</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80" alt="Desserts">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i><span>Desserts</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></span>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap" data-aos="fade-right">
+      <img src="https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?w=800&q=80" alt="Yellow Hills Restaurant">
+      <div class="about-badge">
+        <span class="big">4.7</span>
+        <span>★ Rating</span>
+        <br><small style="font-size:.65rem;opacity:.8">2,823 Reviews</small>
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="section-label">Our Story</div>
+      <h2 class="section-title">Where Mountains<br>Meet Cuisine</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.6)">Nestled along NH 7 in Dehradun, Yellow Hills brings the rich culinary heritage of Uttarakhand to your table, harmoniously blended with flavours from across India and the world.</p>
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="about-feature-icon"><i class="fas fa-star"></i></div>
+          <div class="about-feature-text"><strong>4.7 Star Rated</strong><span>2,823+ Google Reviews</span></div>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-icon"><i class="fas fa-fire"></i></div>
+          <div class="about-feature-text"><strong>Fireplace & Rooftop</strong><span>Unique cozy atmosphere</span></div>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-icon"><i class="fas fa-music"></i></div>
+          <div class="about-feature-text"><strong>Live Music</strong><span>Selected evenings</span></div>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-icon"><i class="fas fa-leaf"></i></div>
+          <div class="about-feature-text"><strong>Women-Owned</strong><span>Proudly identifies</span></div>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-icon"><i class="fas fa-calendar-check"></i></div>
+          <div class="about-feature-text"><strong>Reservations</strong><span>Lunch & Dinner recommended</span></div>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-icon"><i class="fas fa-clock"></i></div>
+          <div class="about-feature-text"><strong>Open Daily</strong><span>Closes at 11 PM</span></div>
+        </div>
+      </div>
+      <div class="about-tags">
+        <span class="about-tag">Dine-In</span>
+        <span class="about-tag">Takeaway</span>
+        <span class="about-tag">Delivery</span>
+        <span class="about-tag">Kerbside Pickup</span>
+        <span class="about-tag">All You Can Eat</span>
+        <span class="about-tag">Family Friendly</span>
+        <span class="about-tag">Wheelchair Accessible</span>
+        <span class="about-tag">Wi-Fi Available</span>
+        <span class="about-tag">Bar On Site</span>
+        <span class="about-tag">Drive-Through</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-title">Visit Us & Reserve</h2>
+    <p class="section-sub">We'd love to have you. Reservations are recommended for lunch & dinner.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div>
+          <strong>Address</strong>
+          <span>NH 7, Saraswati Vihar, Ajabpur Khurd,<br>Dehradun, Uttarakhand 248121<br>(Teachers Colony, Govind Garh)</span>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+        <div>
+          <strong>Phone</strong>
+        
+          <a href="tel:+919058788881">090587 88881</a>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-globe"></i></div>
+        <div>
+          <strong>Website</strong>
+          <a href="https://restaurant.yellowhills.in" target="_blank">restaurant.yellowhills.in</a>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+        <div>
+          <strong>Hours</strong>
+          <span>Open Daily · Closes at 11 PM</span>
+        </div>
+      </div>
+      <div class="map-embed">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3444.0!2d77.9944!3d30.3165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDE5JzAwLjAiTiA3N8KwNTknNDAuMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <h3>Reserve a Table</h3>
+      <p>Fill in the details below and we'll confirm your reservation shortly.</p>
+      <div id="formSuccess" class="form-success">
+        <i class="fas fa-check-circle" style="color:#48bb78;margin-right:.5rem"></i>
+        Your reservation request has been sent! We'll confirm shortly.
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" id="fname" placeholder="e.g. Rahul Sharma">
+          <span class="form-error" id="fnameErr">Please enter your name</span>
+        </div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" id="fphone" placeholder="10-digit mobile number">
+          <span class="form-error" id="fphoneErr">Enter a valid phone number</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date *</label>
+          <input type="date" id="fdate">
+          <span class="form-error" id="fdateErr">Please select a date</span>
+        </div>
+        <div class="form-group">
+          <label>Time *</label>
+          <input type="time" id="ftime">
+          <span class="form-error" id="ftimeErr">Please select a time</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Number of Guests *</label>
+          <select id="fguests">
+            <option value="">Select guests</option>
+            <option>1 Person</option>
+            <option>2 People</option>
+            <option>3–4 People</option>
+            <option>5–6 People</option>
+            <option>7–10 People</option>
+            <option>Large Group (10+)</option>
+          </select>
+          <span class="form-error" id="fguestsErr">Please select guest count</span>
+        </div>
+        <div class="form-group">
+          <label>Preference</label>
+          <select id="fpref">
+            <option>No preference</option>
+            <option>Indoor Seating</option>
+            <option>Rooftop Seating</option>
+            <option>Near Fireplace</option>
+            <option>Private Area</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Special Request</label>
+        <textarea id="fmsg" rows="3" placeholder="Birthday, dietary needs, occasion…"></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%;justify-content:center" onclick="submitForm()">
+        <i class="fas fa-calendar-check"></i> Confirm Reservation
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom:.7rem">
+        <span style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold)">Yellow Hills</span>
+        <span style="font-size:.65rem;color:rgba(255,255,255,0.4);letter-spacing:3px;text-transform:uppercase">Uttarakhandi · Multi Cuisine</span>
+      </div>
+      <p>A destination for authentic Pahadi flavours and world cuisine, nestled along the highways of Dehradun.</p>
+      <div class="footer-social">
+        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://restaurant.yellowhills.in" target="_blank" title="Website"><i class="fas fa-globe"></i></a>
+        <a href="tel:+918279833393" title="Call Us"><i class="fas fa-phone"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#menu">Full Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Reserve a Table</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Cuisine Types</h4>
+      <ul>
+        <li><a href="#menu">Pahadi / Uttarakhandi</a></li>
+        <li><a href="#menu">Indian Curries</a></li>
+        <li><a href="#menu">Chinese</a></li>
+        <li><a href="#menu">Continental</a></li>
+        <li><a href="#menu">Pizza & Pasta</a></li>
+        <li><a href="#menu">Momos & Street</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Opening Hours</h4>
+      <div class="footer-hours">
+        <div class="hour-row"><span>Mon – Fri</span><span>11am – 11pm</span></div>
+        <div class="hour-row"><span>Saturday</span><span>10am – 11pm</span></div>
+        <div class="hour-row"><span>Sunday</span><span>10am – 11pm</span></div>
+      </div>
+      <br>
+      <p style="font-size:.78rem;color:rgba(255,255,255,0.35);line-height:1.6">NH 7, Saraswati Vihar,<br>Ajabpur Khurd, Dehradun<br>Uttarakhand 248121</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Yellow Hills Uttarakhandi & Multi Cuisine Restaurant. All rights reserved.</p>
+    <p>Designed with ❤ for the mountains</p>
+  </div>
+</footer>
+
+<script>
+// ─── NAVBAR SCROLL ───
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('navbar');
+  nav.classList.toggle('scrolled',window.scrollY>40);
+});
+document.getElementById('navbar').classList.add('scrolled');
+
+// ─── HAMBURGER ───
+const hamburger=document.getElementById('hamburger');
+const navLinks=document.getElementById('navLinks');
+hamburger.addEventListener('click',()=>{
+  hamburger.classList.toggle('active');
+  navLinks.classList.toggle('open');
+});
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    hamburger.classList.remove('active');
+    navLinks.classList.remove('open');
+  });
+});
+
+// ─── MENU TABS ───
+document.getElementById('menuTabs').addEventListener('click',e=>{
+  const tab=e.target.closest('.menu-tab');
+  if(!tab) return;
+  const cat=tab.dataset.cat;
+  document.querySelectorAll('.menu-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.menu-category').forEach(c=>c.classList.remove('active'));
+  tab.classList.add('active');
+  document.querySelector(`.menu-category[data-cat="${cat}"]`).classList.add('active');
+});
+
+// ─── LIGHTBOX ───
+function openLightbox(el){
+  const img=el.querySelector('img');
+  document.getElementById('lightboxImg').src=img.src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLightbox(); });
+
+// ─── FORM VALIDATION ───
+function validate(id,errId,checkFn){
+  const el=document.getElementById(id);
+  const err=document.getElementById(errId);
+  if(!checkFn(el.value)){
+    el.classList.add('error');
+    err.classList.add('show');
+    return false;
+  }
+  el.classList.remove('error');
+  err.classList.remove('show');
+  return true;
+}
+function submitForm(){
+  const v1=validate('fname','fnameErr',v=>v.trim().length>=2);
+  const v2=validate('fphone','fphoneErr',v=>/^[6-9]\d{9}$/.test(v.trim()));
+  const v3=validate('fdate','fdateErr',v=>!!v && new Date(v)>=new Date(new Date().toDateString()));
+  const v4=validate('ftime','ftimeErr',v=>!!v);
+  const v5=validate('fguests','fguestsErr',v=>!!v);
+  if(v1&&v2&&v3&&v4&&v5){
+    document.getElementById('formSuccess').classList.add('show');
+    setTimeout(()=>document.getElementById('formSuccess').classList.remove('show'),5000);
+    ['fname','fphone','fdate','ftime','fmsg'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('fguests').value='';
+  }
+}
+['fname','fphone','fdate','ftime','fguests'].forEach(id=>{
+  const el=document.getElementById(id);
+  el.addEventListener('input',()=>{
+    el.classList.remove('error');
+    const errEl=document.getElementById(id+'Err');
+    if(errEl) errEl.classList.remove('show');
+  });
+});
+
+// ─── SMOOTH SCROLL ───
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const target=document.querySelector(a.getAttribute('href'));
+    if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+</script>
+</body>
+</html>
